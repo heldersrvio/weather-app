@@ -1,38 +1,37 @@
-.App {
+#App {
+	width: 100%;
+	height: 100%;
 	text-align: center;
+	transition: background-image 1.2s ease-in-out;
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
 }
 
-.App-logo {
-	height: 40vmin;
-	pointer-events: none;
+.Thunderstorm {
+	background-image: url(./images/thunderstorm.jpg);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 20s linear;
-	}
+.Drizzle {
+	background-image: url(./images/drizzle.jpg);
 }
 
-.App-header {
-	background-color: #282c34;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
+.Rain {
+	background-image: url(./images/rain.jpg);
 }
 
-.App-link {
-	color: #61dafb;
+.Snow {
+	background-image: url(./images/snow.jpg);
 }
 
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.Clear {
+	background-image: url(./images/clear.jpg);
+}
+
+.Clouds {
+	background-image: url(./images/cloudy.jpg);
+}
+
+.Mist, .Smoke, .Haze, .Dust, .Fog, .Sand, .Ash, .Squall, .Tornado {
+	background-image: url('./images/atmosphere.jpg');
 }
