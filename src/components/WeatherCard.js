@@ -58,7 +58,7 @@ const WeatherCard = (props) => {
 			</div>
 			<div id="icon">
 				<img
-					src={`http://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
+					src={`https://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
 					alt={props.weatherDescription}
 				/>
 			</div>

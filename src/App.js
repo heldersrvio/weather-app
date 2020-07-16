@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import WeatherCard from './components/WeatherCard';
 import SearchBar from './components/SearchBar';
 import './App.css';
@@ -29,16 +29,16 @@ const App = () => {
 	};
 
 	const setToUserLocation = async () => {
-		let weatherInformation;
 		if (navigator.geolocation) {
 			try {
-				const response = navigator.geolocation.getCurrentPosition(
-					fetchWeatherInformationWithCoordinates
+				navigator.geolocation.getCurrentPosition(
+          setWeatherInformationFromCoordinates,
+          null,
+          { timeout: 7000 },
 				);
-				weatherInformation = await filterWeatherInformation(response);
 				setHasError(false);
-				setWeather(weatherInformation);
 			} catch (error) {
+        setHasError(true);
 				setToDefaultWeatherInformation();
 			}
 		} else {
@@ -55,11 +55,17 @@ const App = () => {
 		} catch (error) {
 			setHasError(true);
 		}
-	};
+  };
+  
+  const setWeatherInformationFromCoordinates = async (position) => {
+    const response = await fetchWeatherInformationWithCoordinates(position);
+    const weatherInformation = await filterWeatherInformation(response);
+    setWeather(weatherInformation);
+  };
 
 	const fetchWeatherInformationWithCoordinates = async (position) => {
 		return await fetch(
-			`api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${API_KEY}`,
+			`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${API_KEY}`,
 			{
 				mode: 'cors',
 			}
@@ -68,30 +74,30 @@ const App = () => {
 
 	const fetchWeatherInformationWithCity = async (city) => {
 		return await fetch(
-			`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,
+			`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`,
 			{
 				mode: 'cors',
 			}
 		);
-	};
+  };
+  
+  useEffect(() => {
+    setToUserLocation();
+  }, []);
 
 	const filterWeatherInformation = async (response) => {
-		try {
-			const responseData = await response.json();
-			return {
-				weatherMain: responseData.weather[0].main,
-				weatherDescription: responseData.weather[0].description,
-				weatherIcon: responseData.weather[0].icon,
-				temperature: responseData.main.temp,
-				minimumTemperature: responseData.main['temp_min'],
-				maximumTemperature: responseData.main['temp_max'],
-				cityName: responseData.name,
-			};
-		} catch (error) {
-			throw new Error('Not able to convert fetch to json');
-		}
+    const responseData = await response.json();
+    return {
+      weatherMain: responseData.weather[0].main,
+      weatherDescription: responseData.weather[0].description,
+      weatherIcon: responseData.weather[0].icon,
+      temperature: responseData.main.temp,
+      minimumTemperature: responseData.main['temp_min'],
+      maximumTemperature: responseData.main['temp_max'],
+      cityName: responseData.name,
+    };
 	};
-
+  
 	return (
 		<div
 			id="App"
