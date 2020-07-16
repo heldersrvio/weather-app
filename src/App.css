@@ -32,6 +32,18 @@
 	background-image: url(./images/cloudy.jpg);
 }
 
-.Mist, .Smoke, .Haze, .Dust, .Fog, .Sand, .Ash, .Squall, .Tornado {
+.Mist,
+.Smoke,
+.Haze,
+.Dust,
+.Fog,
+.Sand,
+.Ash,
+.Squall,
+.Tornado {
 	background-image: url('./images/atmosphere.jpg');
+}
+
+.Generic {
+	background-color: rgb(46, 168, 206);
 }

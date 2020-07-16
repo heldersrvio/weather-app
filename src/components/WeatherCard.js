@@ -3,40 +3,59 @@ import PropTypes from 'prop-types';
 import './WeatherCard.css';
 
 const WeatherCard = (props) => {
-    const [currentUnit, setCurrentUnit] = useState('C');
-    const [temperature, setTemperature] = useState(props.temperature - 273);
-    const [minimumtemperature, setMinimumTemperature] = useState(props.minimumTemperature - 273);
-    const [maximumTemperature, setMaximumTemperature] = useState(props.maximumTemperature - 273);
+	const [currentUnit, setCurrentUnit] = useState('C');
+	const [temperature, setTemperature] = useState(props.temperature - 273);
+	const [minimumtemperature, setMinimumTemperature] = useState(
+		props.minimumTemperature - 273
+	);
+	const [maximumTemperature, setMaximumTemperature] = useState(
+		props.maximumTemperature - 273
+	);
 
-    const switchToFahrenheit = () => {
-        setCurrentUnit('F');
-    };
+	const switchToFahrenheit = () => {
+		setCurrentUnit('F');
+	};
 
-    const switchToCelsius = () => {
-        setCurrentUnit('C');
-    };
+	const switchToCelsius = () => {
+		setCurrentUnit('C');
+	};
 
-    useEffect(() => {
-        if (currentUnit === 'C') {
-            setTemperature(props.temperature - 273);
-            setMinimumTemperature(props.minimumTemperature - 273);
-            setMaximumTemperature(props.maximumTemperature - 273);
-        } else {
-            setTemperature(props.temperature * (9 / 5) - 459.67);
-            setMinimumTemperature(props.minimumTemperature * (9 / 5) - 459.67);
-            setMaximumTemperature(props.maximumTemperature * (9 / 5) - 459.67);
-        }
-    }, [currentUnit, props.temperature, props.maximumTemperature, props.minimumTemperature]);
+	useEffect(() => {
+		if (currentUnit === 'C') {
+			setTemperature(props.temperature - 273);
+			setMinimumTemperature(props.minimumTemperature - 273);
+			setMaximumTemperature(props.maximumTemperature - 273);
+		} else {
+			setTemperature(props.temperature * (9 / 5) - 459.67);
+			setMinimumTemperature(props.minimumTemperature * (9 / 5) - 459.67);
+			setMaximumTemperature(props.maximumTemperature * (9 / 5) - 459.67);
+		}
+	}, [
+		currentUnit,
+		props.temperature,
+		props.maximumTemperature,
+		props.minimumTemperature,
+	]);
 
 	return (
 		<div id="weather-card">
 			<div id="city-name">
 				<h2>{props.cityName.toUpperCase()}</h2>
 			</div>
-            <div id="toggle-units-buttons">
-                <button onClick={switchToCelsius}>°C</button>
-                <button onClick={switchToFahrenheit}>°F</button>
-            </div>
+			<div id="toggle-units-buttons">
+				<button
+					onClick={switchToCelsius}
+					className={currentUnit === 'C' ? 'active' : 'inactive'}
+				>
+					°C
+				</button>
+				<button
+					onClick={switchToFahrenheit}
+					className={currentUnit === 'F' ? 'active' : 'inactive'}
+				>
+					°F
+				</button>
+			</div>
 			<div id="icon">
 				<img
 					src={`http://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
@@ -45,7 +64,7 @@ const WeatherCard = (props) => {
 			</div>
 			<div id="weather-conditions">
 				<span id="weather-main">{props.weatherMain}</span>
-                <br></br>
+				<br></br>
 				<span id="weather-description">{props.weatherDescription}</span>
 			</div>
 			<div id="temperatures">
@@ -54,7 +73,8 @@ const WeatherCard = (props) => {
 				</div>
 				<div id="min-max-temperatures">
 					<span>
-						{Math.round(minimumtemperature)}° | {Math.round(maximumTemperature)}°F
+						{Math.round(minimumtemperature)}° | {Math.round(maximumTemperature)}
+						°F
 					</span>
 				</div>
 			</div>
