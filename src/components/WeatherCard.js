@@ -74,7 +74,7 @@ const WeatherCard = (props) => {
 				<div id="min-max-temperatures">
 					<span>
 						{Math.round(minimumtemperature)}° | {Math.round(maximumTemperature)}
-						°F
+						°
 					</span>
 				</div>
 			</div>
