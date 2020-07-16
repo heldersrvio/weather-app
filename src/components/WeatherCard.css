@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400&display=swap');
+
+#weather-card {
+    color: black;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    background-color: rgba(255, 255, 255, 0.548);
+    border-radius: 20px;
+    border: 1px solid white;
+    padding: 30px;
+    text-align: left;
+    font-family: 'Karla', sans-serif;
+}
+
+h2, span, img {
+    margin-top: 0;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 40px;
+}
+
+#toggle-units-buttons button {
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+}
+
+#toggle-units-buttons button:hover {
+    text-shadow: 0px 0px 2px rgb(253, 255, 149);
+    color: rgb(253, 255, 149);
+}
