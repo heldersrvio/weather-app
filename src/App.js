@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
 
+const API_KEY = 'c631b7482cbdada87723b245f6c46e0e';
+
 const App = () => {
 	const fetchWeatherInformation = async (location) => {
 		try {
 			return await fetch(
-				`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=API_KEY`
+				`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`
 			);
 		} catch (error) {
 			throw new Error('Not able to retrieve data from the server');
@@ -21,7 +23,7 @@ const App = () => {
 				temperature: responseData.main.temp,
 				minimumTemperature: responseData.main['temp_min'],
 				maximumTemperature: responseData.main['temp_max'],
-				cityName: responseData.sys.name,
+				cityName: responseData.name,
 			};
 		} catch (error) {
 			throw new Error('Not able to convert fetch to json');
